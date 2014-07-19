@@ -21,4 +21,9 @@ Usage
 Before the first time you run the `sshammer` script, copy `sshammer-config` to `~/.sshammer`
 and then modify the `user` and `passwd` fields to correct value.
 
+Once the configuration file is created, you can run the `sshammer/sshammer` script.
+You can also run it as a module by:
+
+    python -m sshammer
+
 When started, this act as a SOCKS5 server on local port 7070. Then you can use it as a proxy.
