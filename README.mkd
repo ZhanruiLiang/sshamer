@@ -4,3 +4,21 @@ It's a tool that helps people in China using the internet freely. This does **no
 in Windows since it has `pexpect` as a dependency.
 
 科学上网，从我做起。
+
+Dependencies
+------------
+* Python 3.4
+* pexpect
+* ssh
+
+Install
+-------
+
+    sudo python setup.py install
+
+Usage
+-----
+Before the first time you run the `sshammer` script, copy `sshammer-config` to `~/.sshammer`
+and then modify the `user` and `passwd` fields to correct value.
+
+When started, this act as a SOCKS5 server on local port 7070. Then you can use it as a proxy.
