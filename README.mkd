@@ -1,0 +1,6 @@
+SSH Hammer
+==========
+It's a tool that helps people in China using the internet freely. This does **not** work
+in Windows since it has `pexpect` as a dependency.
+
+科学上网，从我做起。

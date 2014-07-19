@@ -1,0 +1,7 @@
+{
+    'addr':'myvps.com',
+    'user':'bobby',
+    'port':'22',
+    'passwd':'secret',
+    'local_port': 7070,
+}

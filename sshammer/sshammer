@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+from sshammer.server import main
+main()

@@ -1,0 +1,9 @@
+Host *
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+
+CompressionLevel 6
+ServerAliveInterval 20
+ServerAliveCountMax 100
