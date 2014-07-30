@@ -2,6 +2,7 @@ import os
 import sys
 import signal
 from time import sleep
+from datetime import datetime
 
 import pexpect
 
@@ -40,7 +41,7 @@ class ProxyServer:
         self.ssh = None
 
     def log(self, *args):
-        print(*args)
+        print(datetime.now().strftime('[%H:%M:%S]'), *args)
 
     def start(self):
         config = self.config.copy()
@@ -60,7 +61,8 @@ class ProxyServer:
                 self.log('Sent password')
                 self.wait_connect()
                 self.log('Connected')
-                self.keep()
+                # self.keep()
+                self.menu()
             elif e == 1:
                 ssh.sendline('yes')
             elif e == 2:
@@ -87,8 +89,18 @@ class ProxyServer:
             except ConnectionRefusedError:
                 pass
 
+    def menu(self):
+        while 1:
+            choice = input('0) Reconnect; 1) exit. Your choice:')
+            if choice == '0':
+                return
+            elif choice == '1':
+                self._quit = True
+                return
+            print('Invalid choice.')
+
     def keep(self):
-        signal.signal(signal.SIGINT, self._on_sigint)
+        # signal.signal(signal.SIGINT, self._on_sigint)
         self.log('Ready')
         try:
             while not self._quit:
@@ -101,9 +113,9 @@ class ProxyServer:
                         assert response.status is ResponseStatus.REQUEST_GRANTED
                         msg_send = self.TEST_MESSAGE
                         client.sock.send(msg_send)
-                        self.log('{} << {}'.format(site, msg_send))
+                        # self.log('{} << {}'.format(site, msg_send))
                         msg_recv = client.sock.recv(1)
-                        self.log('{} >> {}'.format(site, msg_recv))
+                        # self.log('{} >> {}'.format(site, msg_recv))
                         client.close()
                         sleep(self.CHECK_INTERVAL)
                         break
