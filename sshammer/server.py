@@ -18,6 +18,7 @@ class ProxyServer:
         'user':'bobby',
         'passwd':'secret',
         'local_port': 7070,
+        'timeout': 5,
     }
 
     Default config path: ~/.sshammer
@@ -55,7 +56,11 @@ class ProxyServer:
             if self.ssh:
                 self.ssh.terminate()
             ssh = self.ssh = pexpect.spawn(cmd)
-            e = ssh.expect(['password:', '(yes/no)', pexpect.EOF])
+            try:
+                e = ssh.expect(['password:', '(yes/no)', pexpect.EOF], timeout=self.config['timeout'])
+            except pexpect.TIMEOUT:
+                self.log('Timeout')
+                continue
             if e == 0:
                 ssh.sendline(config['passwd'])
                 self.log('Sent password')
